@@ -1,16 +1,20 @@
 const express = require('express');
-
+const mongoose = require ('mongoose');
+const cors = require ('cors');
+const userRoutes = require('../routes/user.routes');
+require ('dotenv').config({path : './config/.env'})
+require('./config/db');
 const app = express();
 
+app.use(express.json());
+app.use(cors.json());
+
  //Routes
- //Worker routes
- app.post('/api/client/register', (req, res)=> {
-    res.send('Register routes');
-});
+ app.post('/api/client', userRoutes);
 
 
  //Server
  const PORT = process.env.PORT || 5000;
- app.listen(5000, () =>{
+ app.listen(PORT, () =>{
     console.log(`Server is runing ${PORT}`);
  })
